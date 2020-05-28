@@ -6,6 +6,7 @@ const leftMenu = document.querySelector('.left-menu');
 const tvShowList = document.querySelector('.tv-shows__list');
 const modal = document.querySelector('.modal');
 const tvShows = document.querySelector('.tv-shows');
+const imageContent = document.querySelector('.image__content');
 
 const preloader = document.querySelector('.preloader');
 
@@ -153,6 +154,10 @@ tvShowList.addEventListener('click', event => {
                 
                 tvCardImg.src = IMG_URL + data.poster_path;
                 tvCardImg.alt = data.name;
+                if(!data.poster_path){
+                    imageContent.classList.add('hide');
+                }
+                
                 modalTitle.textContent = data.name;
                 //genresList.innerHTML = data.genres.reduce((acc, item) => `${acc} <li>${item.name}</li>`, ''); // в стрелочкной функции return необязателен                
                 genresList.textContent = '';
@@ -183,6 +188,9 @@ modal.addEventListener('click', event => {
         event.target.classList.contains('modal')){
         document.body.style.overflow = '';
         modal.classList.add('hide');
+        if (imageContent.classList.contains('hide')){
+            imageContent.classList.remove('hide')
+        }
     }
 })
 
